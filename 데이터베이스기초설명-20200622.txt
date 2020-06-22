@@ -1,0 +1,49 @@
+SQL 데이터 베이스: 오라클, MS-SQL,MySQL
+
+DDL:테이블 명령어- creat(생성),drop(삭제),alter(수정)
+
+DML:Data 관리어-insert(저장,추가,삽입),update수정,delete삭제,select검색 
+
+제약 조건: <- ddl,dml 둘다 있음,
+테이블 구조를 정의하면서 데이터 무결성을 유지하기 위해 제약 조건을 이용한다. 제약
+조건이 테이블 생성 과정의 필수 요소는 아니지만 데이터베이스의 일관성(Consistency)을
+유지하고 잘못된 데이터의 입력과 수정으로부터 데이터베이스를 보호하는 데 필수적인 요
+소이므로 반드시 정의하는 것이 좋다.
+대표적인 제약 조건은 기본키(Primary Key)와 외래키(Foreign Key)에 의한 제약 조건이다.
+그 밖에도 UNIQUE KEY, PRIMARY KEY, FOREIGN KEY, NOT NULL, CHECK 등이 있다.
+
+컬럼 이름=변수 이름
+
+제약조건의 자료형
+숫자형
+intyint
+smallint
+med
+문자형
+varchar:가변길이
+char:고정길이
+-------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE Book (
+  bookid      NUMBER(2) PRIMARY KEY,
+  bookname    VARCHAR2(40),
+  publisher   VARCHAR2(40),
+  price       NUMBER(8) 
+);
+
+CREATE TABLE  Customer (
+  custid      NUMBER(2) PRIMARY KEY,  
+  name        VARCHAR2(40),
+  address     VARCHAR2(50),
+  phone       VARCHAR2(20)
+);
+
+
+CREATE TABLE Orders (
+  orderid NUMBER(2) PRIMARY KEY,
+  custid  NUMBER(2) REFERENCES Customer(custid),
+  bookid  NUMBER(2) REFERENCES Book(bookid),
+  saleprice NUMBER(8) ,
+  orderdate DATE
+);
